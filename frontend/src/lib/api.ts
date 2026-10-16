@@ -53,7 +53,8 @@ async function request<T>(path: string, init: RequestInit & { query?: Query } = 
     res = await fetch(buildUrl(path, query), { cache: "no-store", ...rest });
   } catch {
     throw new ApiError(
-      `Cannot reach the StockWise API at ${API_BASE_URL}. Make sure the backend is running.`,
+      `Cannot reach the StockWise API at ${API_BASE_URL}. Make sure the backend is running ` +
+        "(a free hosted instance can take up to a minute to wake up; retry shortly).",
       0,
       "network_error",
     );

@@ -100,6 +100,7 @@ stockwise-ai/
 ├── data/                      sample_sales.csv (synthetic), sample_sales_invalid.csv (demo)
 ├── docs/                      architecture, API, model selection, testing, workflow, interview prep…
 ├── screenshots/               agent-verification/ (captured during development) + manual checklist
+├── render.yaml                Render Blueprint for the backend (see docs/DEPLOYMENT.md)
 ├── .env.example  .gitignore  README.md
 ```
 
@@ -358,6 +359,7 @@ Copy `.env.example` to `.env` (backend) and `frontend/.env.local` (frontend) if 
 |---|---|---|
 | `DATABASE_URL` | `sqlite:///<repo>/backend/stockwise.db` | backend |
 | `CORS_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | backend |
+| `CORS_ORIGIN_REGEX` | unset (optional regex, e.g. for Vercel preview URLs) | backend |
 | `LOG_LEVEL` | `INFO` | backend |
 | `MAX_UPLOAD_BYTES` / `MAX_UPLOAD_ROWS` | `5242880` / `200000` | backend |
 | `AUTO_MIGRATE` | `true` (run Alembic on startup) | backend |
@@ -457,7 +459,7 @@ Last recorded results: **94 backend tests passed**, **11 frontend tests passed**
 - Recommendation history is not persisted. Recommendations are recomputed on request.
 - Returns (negative quantities) are rejected, not netted.
 - The bundled PostCSS inside Next.js 15.5.28 has an open `npm audit` advisory. It is a build-time tool that only processes our own CSS. The fix requires upgrading to Next 16, which is a breaking change, so it was not done.
-- No Docker setup is provided.
+- No Docker setup is provided. Hosted deployment uses Render + Vercel free tiers ([docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)); there the SQLite disk is ephemeral and re-seeded on restart.
 
 ## 25. Reproducibility
 
@@ -473,6 +475,7 @@ See [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) for a timed walkthrough. It cover
 ### Further documentation
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 - [docs/API.md](docs/API.md)
 - [docs/MODEL_SELECTION.md](docs/MODEL_SELECTION.md)
 - [docs/TESTING.md](docs/TESTING.md)

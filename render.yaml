@@ -1,0 +1,29 @@
+# Render Blueprint for the StockWise AI backend (FastAPI).
+# Render dashboard → New → Blueprint → select this repository.
+# The frontend is deployed separately on Vercel (see docs/DEPLOYMENT.md).
+services:
+  - type: web
+    name: stockwise-ai-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # Free instances have no persistent disk: the SQLite file is recreated on every
+    # start, so the synthetic sample (with demo inventory + forecasts) is loaded when
+    # the database is empty. Uploaded data does not survive a restart or redeploy.
+    startCommand: python -m scripts.seed --if-empty && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips="*"
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: STOCKWISE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      # Exact frontend origin(s), comma-separated. Set to your Vercel production URL.
+      - key: CORS_ORIGINS
+        value: https://stockwise-ai.vercel.app
+      # Also allow this project's Vercel preview/production URLs.
+      - key: CORS_ORIGIN_REGEX
+        value: ^https://stockwise-ai[a-z0-9-]*\.vercel\.app$

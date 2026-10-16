@@ -1,6 +1,9 @@
 """Load the synthetic sample dataset, demo inventory settings and initial forecasts.
 
-Usage (from backend/):  python -m scripts.seed [--reset] [--horizon 60]
+Usage (from backend/):  python -m scripts.seed [--reset | --if-empty] [--horizon 60]
+
+--if-empty seeds only when no dataset exists yet. It is used by the hosted demo's start
+command, so a restart on a persistent disk does not pile up duplicate forecast runs.
 
 Runs the same service functions the API uses. Inventory values below are demo
 *configuration* (stock on hand, lead times) chosen to show different risk situations;
@@ -9,7 +12,10 @@ all forecasts, metrics and recommendations are computed from the data.
 
 import argparse
 
+from sqlalchemy import select
+
 from app.config import get_settings
+from app.db.models import Dataset
 from app.db.migrate import upgrade_to_head
 from app.db.session import SessionLocal
 from app.errors import ConflictError
@@ -45,6 +51,9 @@ DEFAULTS = dict(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reset", action="store_true", help="delete the SQLite file first")
+    parser.add_argument(
+        "--if-empty", action="store_true", help="do nothing if any dataset already exists"
+    )
     parser.add_argument("--horizon", type=int, default=60)
     args = parser.parse_args()
 
@@ -55,6 +64,9 @@ def main() -> None:
 
     db = SessionLocal()
     try:
+        if args.if_empty and db.scalar(select(Dataset.id).limit(1)) is not None:
+            print("Database already has data; skipping seed (--if-empty).")
+            return
         raw = sample_csv_bytes()
         result = validate_sales_csv(raw, SAMPLE_FILENAME, "text/csv")
         try:
