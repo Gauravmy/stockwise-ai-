@@ -54,7 +54,7 @@ Status values: ✅ complete and verified · 🟡 implemented, not fully verified
 | Evidence checklist (`docs/AI_TOOL_USAGE.md`, `screenshots/README.md`) | ✅ |
 | **CodeZero usage and evidence** | ⛔ **Not done.** You must sign up, use CodeZero on real tasks and record the evidence. **Do not claim it before then.** |
 | Full-size screenshots / video | ⛔ To capture manually (`screenshots/README.md`) |
-| Git commit / GitHub push | 🟡 Initial commit made locally; remote `origin` = https://github.com/Gauravmy/stockwise-ai (push pending) |
+| Git commit / GitHub push | ✅ Pushed to https://github.com/Gauravmy/stockwise-ai- (main) |
 
 ## B. Pre-submission steps
 
@@ -118,7 +118,7 @@ These steps need your GitHub account, so they were not run.
 5. Add the remote (already done in this checkout):
 
    ```bash
-   git remote add origin https://github.com/Gauravmy/stockwise-ai.git
+   git remote add origin https://github.com/Gauravmy/stockwise-ai-.git
    ```
 
 6. Push:
@@ -138,7 +138,7 @@ Dear Edvexa Hiring Team,
 
 Please find my submission for the Software Engineer Intern technical assignment.
 
-Repository: https://github.com/Gauravmy/stockwise-ai
+Repository: https://github.com/Gauravmy/stockwise-ai-
 Demo video: <DEMO_VIDEO_URL>   (optional)
 
 StockWise AI is a local full-stack application (FastAPI + SQLite + scikit-learn backend,
