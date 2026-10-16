@@ -54,7 +54,7 @@ Status values: ✅ complete and verified · 🟡 implemented, not fully verified
 | Evidence checklist (`docs/AI_TOOL_USAGE.md`, `screenshots/README.md`) | ✅ |
 | **CodeZero usage and evidence** | ⛔ **Not done.** You must sign up, use CodeZero on real tasks and record the evidence. **Do not claim it before then.** |
 | Full-size screenshots / video | ⛔ To capture manually (`screenshots/README.md`) |
-| Git commit / GitHub push | ⛔ The repo is initialised, but nothing is committed or pushed |
+| Git commit / GitHub push | 🟡 Initial commit made locally; remote `origin` = https://github.com/Gauravmy/stockwise-ai (push pending) |
 
 ## B. Pre-submission steps
 
@@ -115,10 +115,10 @@ These steps need your GitHub account, so they were not run.
    git commit -m "StockWise AI: demand forecasting and inventory optimization platform"
    ```
 
-5. Add the remote, replacing the placeholder with your repository URL:
+5. Add the remote (already done in this checkout):
 
    ```bash
-   git remote add origin https://github.com/<your-username>/stockwise-ai.git
+   git remote add origin https://github.com/Gauravmy/stockwise-ai.git
    ```
 
 6. Push:
@@ -132,13 +132,13 @@ Commit your CodeZero-assisted changes as **separate commits**, so their diffs ar
 ## D. Submission email draft
 
 ```
-Subject: Software Engineer Intern Assignment – StockWise AI – <Your Name>
+Subject: Software Engineer Intern Assignment – StockWise AI – Gaurav Dhakad
 
 Dear Edvexa Hiring Team,
 
 Please find my submission for the Software Engineer Intern technical assignment.
 
-Repository: <GITHUB_REPOSITORY_URL>
+Repository: https://github.com/Gauravmy/stockwise-ai
 Demo video: <DEMO_VIDEO_URL>   (optional)
 
 StockWise AI is a local full-stack application (FastAPI + SQLite + scikit-learn backend,
@@ -162,6 +162,6 @@ docs/TESTING.md.
 Thank you for your time. I look forward to discussing the project.
 
 Kind regards,
-<Your Name>
+Gaurav Dhakad
 <Phone> · <Email> · <LinkedIn URL>
 ```
